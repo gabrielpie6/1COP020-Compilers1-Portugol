@@ -1,0 +1,114 @@
+Programa -> algoritmo identificador ; BlocoVariaveis ProcedimentoFuncao BlocoComandos .
+
+ProcedimentoFuncao -> DeclaraProcedimento ProcedimentoFuncao
+ProcedimentoFuncao -> DeclaraFuncao ProcedimentoFuncao
+ProcedimentoFuncao -> ''
+
+DeclaraProcedimento -> procedimento identificador Parametros ; DeclaraParametros BlocoVariaveis BlocoComandos ;
+
+DeclaraFuncao -> funcao identificador Parametros : TipoBasico ; DeclaraParametros BlocoVariaveis BlocoComandos ;
+
+Parametros -> ( DeclaraIdentificador )
+Parametros -> ''
+
+DeclaraParametros -> Declaracoes
+DeclaraParametros -> ''
+
+BlocoVariaveis -> variaveis Declaracoes
+BlocoVariaveis -> ''
+
+Declaracoes -> Declarations DeclaracoesBonus
+DeclaracoesBonus -> Declaracoes
+DeclaracoesBonus -> ''
+Declarations -> DeclaraTipo
+Declarations -> DeclaraVariaveis
+
+DeclaraTipo -> tipo identificador = VetorMatriz [ Dimensao ] TipoBasico ;
+DeclaraVariaveis -> TipoBasico : DeclaraIdentificador ;
+DeclaraIdentificador -> identificador DeclaraIdentificadorBonus
+DeclaraIdentificadorBonus -> , DeclaraIdentificador
+DeclaraIdentificadorBonus -> ''
+
+VetorMatriz -> vetor
+VetorMatriz -> matriz
+
+Dimensao -> numero_inteiro : numero_inteiro DimensaoBonus
+DimensaoBonus -> , Dimensao
+DimensaoBonus -> ''
+
+TipoBasico -> inteiro
+TipoBasico -> real
+TipoBasico -> caractere
+TipoBasico -> logico
+TipoBasico -> identificador
+
+BlocoComandos -> inicio ListaComandos fim
+
+ListaComandos -> Comandos ; ListaComandosBonus
+ListaComandosBonus -> ListaComandos
+ListaComandosBonus -> ''
+
+Comandos -> identificador CommandsIdentifier
+CommandsIdentifier -> ''
+CommandsIdentifier -> ( ExprIter )
+CommandsIdentifier -> <- Expressao
+CommandsIdentifier -> [ ExprIter ] <- Expressao
+Comandos -> se Expressao entao ListaComandos ElseIf fim se
+ElseIf -> senao ListaComandos
+ElseIf -> ''
+Comandos -> enquanto Expressao faca ListaComandos fim enquanto
+Comandos -> para identificador de Expressao ate Expressao StepFor faca ListaComandos fim para
+StepFor -> passo Expressao
+StepFor -> ''
+Comandos -> repita ListaComandos ate Expressao
+Comandos -> leia ( Variavel )
+Comandos -> imprima ( ExprIter )
+
+Expressao -> ExpressaoSimples ExpressaoNew
+
+ExpressaoNew -> = ExpressaoSimples ExpressaoNew
+ExpressaoNew -> <> ExpressaoSimples ExpressaoNew
+ExpressaoNew -> < ExpressaoSimples ExpressaoNew
+ExpressaoNew -> <= ExpressaoSimples ExpressaoNew
+ExpressaoNew -> >= ExpressaoSimples ExpressaoNew
+ExpressaoNew -> > ExpressaoSimples ExpressaoNew
+ExpressaoNew -> ''
+
+ExpressaoSimples -> Signal Termo ExpressaoSimplesNew
+Signal -> +
+Signal -> -
+Signal -> ''
+
+ExpressaoSimplesNew -> + Termo ExpressaoSimplesNew
+ExpressaoSimplesNew -> - Termo ExpressaoSimplesNew
+ExpressaoSimplesNew -> ou Termo ExpressaoSimplesNew
+ExpressaoSimplesNew -> ''
+
+Termo -> Fator TermoNew
+
+TermoNew -> * Fator TermoNew
+TermoNew -> / Fator TermoNew
+TermoNew -> div Fator TermoNew
+TermoNew -> e Fator TermoNew
+TermoNew -> ''
+
+Fator -> ( Expressao )
+Fator -> nao Fator
+Fator -> numero_inteiro
+Fator -> numero_real
+Fator -> verdadeiro
+Fator -> falso
+Fator -> string
+Fator -> identificador IdentifierVariable
+
+IdentifierVariable -> ( ExprIter )
+IdentifierVariable -> VariableExp
+
+
+Variavel -> identificador VariableExp
+VariableExp -> [ ExprIter ]
+VariableExp -> ''
+
+ExprIter -> Expressao ExprIterBonus
+ExprIterBonus -> , ExprIter
+ExprIterBonus -> ''

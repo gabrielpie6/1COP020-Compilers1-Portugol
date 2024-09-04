@@ -1,0 +1,74 @@
+D -> a b ; A B C .
+B -> E B
+B -> F B
+B -> 
+E -> c b G ; H A C ;
+F -> d b G : I ; H A C ;
+G -> ( J )
+G -> 
+H -> K
+H -> 
+A -> f K
+A -> 
+K -> L
+K -> M
+K -> L K
+K -> M K
+M -> g b = N [ O ] I ;
+L -> I : J ;
+J -> b
+J -> b , J
+N -> h
+N -> i
+O -> j : j
+O -> j : j , O
+I -> k
+I -> l
+I -> m
+I -> n
+I -> b
+C -> o P p
+P -> Q ;
+P -> Q ; P
+Q -> b
+Q -> b ( R )
+Q -> S q T
+Q -> r T s P p r
+Q -> r T s P t P p r
+Q -> u T v P p u
+Q -> w b x T y T v P p w
+Q -> w b x T y T z T v P p w
+Q -> 0 P y T
+Q -> 1 ( S )
+Q -> 2 ( R )
+T -> U
+T -> T = U
+T -> T 3 U
+T -> T { U
+T -> T 4 U
+T -> T 5 U
+T -> T } U
+U -> V
+U -> + V
+U -> - V
+U -> U + V
+U -> U - V
+U -> U 6 V
+V -> W
+V -> V * W
+V -> V / W
+V -> V 7 W
+V -> V e W
+W -> ( T )
+W -> 8 W
+W -> j
+W -> 9
+W -> @
+W -> #
+W -> !
+W -> b ( R )
+W -> S
+S -> b
+S -> b [ R ]
+R -> T
+R -> T , R
