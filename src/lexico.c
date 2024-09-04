@@ -75,22 +75,25 @@ void acceptWord(int length)
     {
         w       = (char *) popInQueue(buffer);
         word[i] = *w;
-        wordLowerCase[i] = ('A' <= word[i] && word[i] <= 'Z') ? (word[i] + ('a'-'A')) : (word[i]);
+        wordLowerCase[i] = ('A' <= word[i] && word[i] <= 'Z') ? (word[i] + 32) : (word[i]);
         free(w);
     }
     word[length] = '\0';
+    wordLowerCase[length] = '\0';
     seek = 0;
 
-    
 
 
 
     // printf("\nTOKEN: %s", word);
     // if (validState != 16 && validState != 15) printf("\n");
+
+    // printf("\n[%s]", word);
     switch(validState)
     {
         case 11: // possible IDENTIFIER or any special word
             // printf("IDENTIFICADOR [%s]", word);
+            // printf("\nid_lower[%s]", wordLowerCase);
                  if (strcmp(wordLowerCase, "algoritmo")     == 0)   appendToken(ALGORITMO,      strdup(word));
             else if (strcmp(wordLowerCase, "inicio")        == 0)   appendToken(INICIO,         strdup(word));
             else if (strcmp(wordLowerCase, "fim")           == 0)   appendToken(FIM,            strdup(word));
@@ -302,8 +305,8 @@ State delta(State q, char w)
     /*16*/	{00,	00,		00,		00,		00,		00,		00,		00,		     00,    		00,		00,		00,		00,		00,		00,		00,     00},
     /*17*/	{00,	00,		00,		00,		00,		00,		00,		00,		     00,    		00,		00,		00,		00,		00,		00,		00,     00},
     /*18*/	{00,	00,		00,		00,		00,		00,		00,		19,		     00,    		00,		00,		00,		00,		00,		00,		00,     00},
-    /*19*/	{00,	19,		19,		19,		19,		19,		00,		19,		     19,    		19,		19,		19,		00,		00,		00,		00,     00},
-    /*20*/	{00,	20,		20,		20,		20,		20,		20,		20,		     20,    		20,		20,		21,		00,		00,		00,		00,     00},
+    /*19*/	{00,	19,		19,		19,		19,		19,		00,		19,		     19,    		19,		19,		19,		19,		19,		19,		19,     19},
+    /*20*/	{00,	20,		20,		20,		20,		20,		20,		20,		     20,    		20,		20,		21,		20,		20,		20,		20,     20},
     /*21*/	{00,	00,		00,		00,		00,		00,		00,		00,		     00,    		00,		00,		00,		00,		00,		00,		00,     00},
     /*22*/	{00,	00,		00,		00,		00,		00,		00,		00,		     00,    		00,		00,		00,		00, 	23,		24,		25,     00},
     /*23*/	{00,	00,		00,		00,		00,		00,		00,		00,		     00,    		00,		00,		00,		00,		00,		00,		00,     00},
@@ -396,34 +399,7 @@ Queue lexico()
             }
         }
 
-        // acceptWord(1);
-        // printf("%3c", w);
     }
-    // Tratamento de ultimo reconhecimento
-
-    // printf("\n");
-
-    // printf("%3c", popInQueue(buffer));
-    // printf("%3c", popInQueue(buffer));
-    // printf("TAMANHO: %d", getQueueLength(buffer));
-    // int k = getQueueLength(buffer);
-    // for (int i = 0; i < k; i++)
-    //     printf("%3c", popInQueue(buffer));
-
-    // printf("TAMANHO: %d", getQueueLength(buffer));
-
-
-
-
-
-
-    // w      = getCharToParse();
-    // result = process(w)
-    // if (result == END_OF_WORD)
-    // {
-    //     acceptWord(length)
-    //     break;
-    // }
 
     appendToken(END_OF_STRING, NULL);
     return tokens;

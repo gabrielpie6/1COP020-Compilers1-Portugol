@@ -117,7 +117,7 @@ void error(int t)
         SINTATICO.status = REJECTED;
     }
 }
-void advance() {SINTATICO.token = getToken(); /*printf("\navancou -> %d", SINTATICO.token);*/}
+void advance() {SINTATICO.token = getToken(); /*printf("\navancou -> %d [%s]", SINTATICO.tk->id, (char *) SINTATICO.tk->data);*/}
 void eat(int t) {if (SINTATICO.token == t) {/*printf("\ncomeu -> %d", SINTATICO.token);*/ advance();} else error(t);}
 
 
