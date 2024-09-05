@@ -14,8 +14,11 @@ State validState   = (State) NULL_STATE;
 int movCount       = 0;
 int strLen         = 0;
 
-int column = 1;
-int line   = 1;
+int column;
+int line;
+
+int curColumn;
+int curLine;
 
 
 Queue buffer, tokens;
@@ -54,6 +57,12 @@ char getCharToParse()
         {
             reading = 0;
             return eof;
+        }
+        curColumn++;
+        if(*w == '\n')
+        {
+            curColumn = 0;
+            curLine++;
         }
         insertInQueue(buffer, w);
         seek++;
@@ -136,8 +145,8 @@ void acceptWord(int length)
         case 15: // SPACE
             break;
         case 16: // NEWLINE
-            column = 0;
-            line++;
+            // column = 0;
+            // line++;
             break;
         case 17:
         case 18:
@@ -238,7 +247,9 @@ void acceptWord(int length)
             break;
     }
 
-    column += length;
+    // column += length;
+    column = curColumn;
+    line   = curLine;
 
     currentState = (State) 10;
     validState   = (State) NULL_STATE;
@@ -363,6 +374,10 @@ Queue lexico()
     State q;
 
     LEXICO.status = 1;
+    column    = 1;
+    line      = 1;
+    curColumn = 1;
+    curLine   = 1;
 
     buffer = createQueue();
     tokens = createQueue();
