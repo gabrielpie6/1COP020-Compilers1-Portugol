@@ -2,6 +2,7 @@ PROJ_NAME=portugol
 
 LIBS=queue.h tokens.h lexico.h sintatico.h
 OBJETOS=lexico.o sintatico.o queue.o tokens.o
+FONTES=lexico.c queue.c sintatico.c tokens.c
 
 # compilador
 CC=gcc
@@ -15,3 +16,6 @@ $(PROJ_NAME): $(OBJETOS)
 
 %.o : %.c
 	$(CC) -c $(CFLAGS) $< -o $@
+
+entrega: $(LIBS) $(FONTES) Makefile
+	zip portugol.zip $(LIBS) $(FONTES) Makefile
